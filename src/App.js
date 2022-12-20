@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Header from "./Header";
 import HelloWorldService from "./services/HelloWorldService";
-import UserService from "./services/UserService";
+import TodoService from "./services/TodoService";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -11,12 +11,12 @@ function App() {
 
   useEffect(() => {
     //getHelloWorld();
-    getUsers();
+    getTodos();
   }, []);
 
-  const getUsers = () => {
-    UserService.getUsers().then((response) => {
-      setUsers(response.data);
+  const getTodos = () => {
+    TodoService.getTodos().then((response) => {
+      setTodos(response.data);
       console.log(response.data);
     });
   };
@@ -26,7 +26,7 @@ function App() {
       console.log(response.data);
     });
   };
-
+  /*
   const addTodo = (e) => {
     e.preventDefault();
 
@@ -45,35 +45,16 @@ function App() {
 
   const removeTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
-  };
+  };*/
 
   return (
     <>
       <Header />
       <div className="container">
-        <form onSubmit={addTodo}>
-          <input
-            autoFocus
-            type="text"
-            placeholder="Add a ToDo"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <button className="btn">Add ToDo</button>
-        </form>
         {todos.map((todo) => (
           <div key={todo.id} className="todo">
-            <p>{todo.text}</p>
-            <button className="btn-delete" onClick={() => removeTodo(todo.id)}>
-              Delete
-            </button>
-          </div>
-        ))}
-
-        {users.map((user) => (
-          <div className="todo" key={user.id}>
-            <p>{user.username}</p>
-            <p>{user.email}</p>
+            <h2>{todo.title}</h2>
+            <p>{todo.description}</p>
           </div>
         ))}
       </div>

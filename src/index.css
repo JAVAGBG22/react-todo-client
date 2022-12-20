@@ -64,13 +64,19 @@ input {
 
 .todo {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
   padding: 1rem;
   border: 2px solid black;
   width: 44.5rem;
   margin-top: 1rem;
   border-radius: 8px;
+}
+
+.todo p {
+  margin-top: 1rem;
 }
 
 .btn-delete {
